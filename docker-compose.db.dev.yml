@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  db:
+    container_name: pg13
+    image: timescale/timescaledb:latest-pg13
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-Python123}
+      - POSTGRES_DB=${POSTGRES_DB:-postgres}
+    volumes:
+      - ./db_data/postgres/db-data:/var/lib/postgresql/data/ # persist data even if container shuts down
+    ports:
+      - 5432:5432
+
+  pgAdmin:
+    container_name: pgAdmin
+    image: dpage/pgadmin4:5.3
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=dev@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=Python123
+    ports:
+      - 5050:80
