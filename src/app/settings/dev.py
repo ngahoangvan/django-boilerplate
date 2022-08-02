@@ -14,10 +14,11 @@ SWAGGER_SETTINGS = {
             'name': 'Authorization',
             'in': 'header'
         }
-    }
+    },
+    'LOGOUT_URL': '/auth/logout'
 }
 
 
 # Hosting and CORS
-CORS_ALLOWED_ORIGINS = ()
+CORS_ALLOWED_ORIGINS = []
 ALLOWED_HOSTS += []

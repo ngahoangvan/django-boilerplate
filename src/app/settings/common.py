@@ -143,3 +143,5 @@ SIMPLE_JWT = {
     'VERIFYING_KEY': os.environ.get('SECRET_KEY'),
     'ALGORITHM': 'HS256',
 }
+
+AUTH_USER_MODEL = 'authentication.User'
