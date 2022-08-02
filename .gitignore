@@ -1,4 +1,10 @@
+# Database dump folder
 db_data
+
+# Django
 static
 __pycache__
 .env
+
+# Working tool
+.vscode
