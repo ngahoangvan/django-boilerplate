@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework_simplejwt.token_blacklist',
     'authentication'
 ]
 
@@ -136,11 +137,25 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # Json Web Token configuration
 # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '60/hour',
+        'user': '300/minute'
+    }
+}
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=7),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=365),
-    'SIGNING_KEY': os.environ.get('SECRET_KEY'),
-    'VERIFYING_KEY': os.environ.get('SECRET_KEY'),
+    'SIGNING_KEY': SECRET_KEY,
+    'VERIFYING_KEY': SECRET_KEY,
     'ALGORITHM': 'HS256',
 }
 

@@ -44,6 +44,7 @@ class User(AbstractUser):
     # User information
     avatar        = models.ImageField(upload_to=AVATAR_UPLOAD_TO, max_length=511, null=True, blank=True, default=None, verbose_name="avatar")
     email         = LowercaseEmailField(verbose_name='email address', max_length=255, unique=True, db_index=True)
+    username      = models.CharField(max_length=64, blank=True)
     first_name    = models.CharField(max_length=64, null=True, blank=True)
     last_name     = models.CharField(max_length=64, null=True, blank=True)
     address       = models.CharField(verbose_name="address", max_length=255, null=True, blank=True)
@@ -53,6 +54,11 @@ class User(AbstractUser):
     role          = models.IntegerField(choices=RoleChoices.choices, default=RoleChoices.NORMAL_USER)
     created_at    = models.DateTimeField(auto_now_add=True)
     updated_at    = models.DateTimeField(auto_now=True)
+
+    # setting login on admin page with email
+    REQUIRED_FIELDS = []
+    USERNAME_FIELD = "email"
+
 
     def __str__(self):
         return f"{self.username} | {self.get_full_name()}"
