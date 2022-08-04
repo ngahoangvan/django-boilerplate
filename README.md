@@ -63,6 +63,8 @@ will look like:
 (venv) $ cd django-boilerplate
 # Install package
 (venv) $ pip install requirements.txt
+# Copy .env file
+(venv) $ cp src/.env.example src/.env
 # Create migration
 (venv) $ python src/manage.py makemigrations 
 # Apply migration file
@@ -77,7 +79,7 @@ will look like:
 
 ## TODO list
 - [x] DRF JWT Authentication
-- [ ] Get value from **.env** file
+- [x] Get value from **.env** file
 - [ ] Users api CRUD endpoints
 - [ ] Add docker configurations
 - [ ] Document folder structure
