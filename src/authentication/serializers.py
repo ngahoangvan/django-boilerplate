@@ -29,19 +29,19 @@ class RegisterSerializer(serializers.ModelSerializer):
 class LoginSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(max_length=255, min_length=5)
     password = serializers.CharField(max_length=255, min_length=6, write_only=True)
-    # tokens = serializers.SerializerMethodField()
+    tokens = serializers.SerializerMethodField()
 
     class Meta:
         model = User
         fields = ['email', 'password', 'tokens']
 
-    # def get_tokens(self, obj):
-    #     user = User.objects.get(email=obj['email'])
-    #     tokens = user.tokens()
-    #     return {
-    #         'refresh_token': str(tokens['refresh']),
-    #         'access_token': str(tokens['access'])
-    #     }
+    def get_tokens(self, obj):
+        user = User.objects.get(email=obj['email'])
+        tokens = user.tokens()
+        return {
+            'refresh_token': str(tokens['refresh']),
+            'access_token': str(tokens['access'])
+        }
 
     def validate(self, attrs):
         email = attrs.get('email', '')
@@ -52,10 +52,7 @@ class LoginSerializer(serializers.ModelSerializer):
         if not user.is_active:
             raise AuthenticationFailed('Your account is disabled')
 
-        return {
-            'email': user.email,
-            'tokens': user.tokens
-        }
+        return attrs
 
 
 class LogoutSerializer(serializers.Serializer):

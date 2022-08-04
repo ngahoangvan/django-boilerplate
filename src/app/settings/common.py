@@ -157,6 +157,10 @@ SIMPLE_JWT = {
     'SIGNING_KEY': SECRET_KEY,
     'VERIFYING_KEY': SECRET_KEY,
     'ALGORITHM': 'HS256',
+    # When set to True, if a refresh token is submitted to the TokenRefreshView, 
+    # a new refresh token will be returned along with the new access token.
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
 }
 
 AUTH_USER_MODEL = 'authentication.User'
