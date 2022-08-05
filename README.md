@@ -79,14 +79,35 @@ will look like:
 **Note**: If you got issue is connection with database, please look at 
 ```src/app/settings/common.py``` to edit DATABASES setting
 
+## Folder Structure
+```bash
+.
+├── bin                          # folder of bash file as quick tool
+│   └── gunicorn.sh
+├── docker-compose.db.dev.yml    # docker-compose file for db
+├── docker-compose.yaml          # docker-compose file for development
+├── requirements                 # requirements folder
+│   ├── all.txt
+│   ├── common.txt
+│   ├── dev.txt
+│   ├── prod.txt
+│   └── test.txt
+└── src                          # django source app
+    ├── app                      # core setting
+    ├── authentication           # authentication app
+    ├── users                    # user app
+    ├── tests                    # unit test
+    ├── manage.py                # django manage file
+    └── ... 
+```
 
 ## TODO list
 - [x] DRF JWT Authentication
 - [x] Get value from **.env** file
 - [x] Users api CRUD endpoints
 - [ ] Add docker configurations
-- [ ] Document folder structure
-- [ ] Configure Static/media & templates
+- [x] Document folder structure
+- [ ] Configure static/media & templates
 - [ ] Unit test
 - [ ] Integrate reactjs
 - [ ] Github action
