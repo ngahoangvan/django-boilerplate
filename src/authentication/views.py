@@ -2,9 +2,8 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 
-from .models import User
 from .serializers import (LoginSerializer, LogoutSerializer,
-                          RegisterSerializer, UserSerializer)
+                          RegisterSerializer)
 
 # Create your views here.
 
@@ -56,13 +55,3 @@ class LogoutAPIView(generics.GenericAPIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         except Exception as e:
             return Response(data={'errors': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-
-
-class GetUsersAPIView(generics.GenericAPIView):
-    serializer_class = UserSerializer
-    permission_classes = (permissions.IsAdminUser,)
-
-    def get(self, request):
-        user_db = User.objects.all()
-        response = self.serializer_class(user_db, many=True).data
-        return Response(data={'data': response}, status=status.HTTP_200_OK)

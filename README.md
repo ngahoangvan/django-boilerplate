@@ -16,7 +16,10 @@ POST | `/auth/logout` | Logout
 
 Method | Endpoint | Functionality
 --- | --- | ---
-GET | `/auth/users` | Get list users
+GET | `/users/list` | Get list users
+GET | `/users/me` | Get current user
+PUT/PATCH | `/users/me` | Update current user
+GET | `/users/<user_id>` | Get user by id
 
 ## Installation
 ### Pre-require
@@ -80,7 +83,7 @@ will look like:
 ## TODO list
 - [x] DRF JWT Authentication
 - [x] Get value from **.env** file
-- [ ] Users api CRUD endpoints
+- [x] Users api CRUD endpoints
 - [ ] Add docker configurations
 - [ ] Document folder structure
 - [ ] Configure Static/media & templates

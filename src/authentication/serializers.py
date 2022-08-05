@@ -96,11 +96,3 @@ class ResetPasswordSerializer(serializers.Serializer):
             return user
         except Exception as e:
             raise AuthenticationFailed('Invalid or expired password reset link.', 401)
-
-
-class UserSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = User
-        # fields = '__all__'
-        exclude = ['password', 'username']
