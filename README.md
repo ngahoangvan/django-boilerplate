@@ -22,7 +22,7 @@ PUT/PATCH | `/users/me` | Update current user
 GET | `/users/<user_id>` | Get user by id
 
 ## Installation
-### Pre-require
+### Pre-requisite
 - Python 3.8+
 - PIP
 
