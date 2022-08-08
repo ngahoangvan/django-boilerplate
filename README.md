@@ -105,7 +105,7 @@ will look like:
 - [x] DRF JWT Authentication
 - [x] Get value from **.env** file
 - [x] Users api CRUD endpoints
-- [ ] Add docker configurations
+- [x] Add docker configurations
 - [x] Document folder structure
 - [ ] Configure static/media & templates
 - [ ] Unit test
