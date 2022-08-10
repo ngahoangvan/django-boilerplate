@@ -1,9 +1,9 @@
+from django.shortcuts import render
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 
-from .serializers import (LoginSerializer, LogoutSerializer,
-                          RegisterSerializer)
+from .serializers import LoginSerializer, LogoutSerializer, RegisterSerializer
 
 # Create your views here.
 
@@ -55,3 +55,10 @@ class LogoutAPIView(generics.GenericAPIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         except Exception as e:
             return Response(data={'errors': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class WelcomeEmailView(generics.GenericAPIView):
+    serializer_class = None
+
+    def get(self, request):
+        return render(request, 'email/base_email.html',{})

@@ -84,6 +84,8 @@ will look like:
 .
 ├── bin                          # folder of bash file as quick tool
 │   └── gunicorn.sh
+│   └── dc-*.sh                  # script for docker-compose
+│
 ├── docker-compose.db.dev.yml    # docker-compose file for db
 ├── docker-compose.yaml          # docker-compose file for development
 ├── requirements                 # requirements folder
@@ -107,7 +109,7 @@ will look like:
 - [x] Users api CRUD endpoints
 - [x] Add docker configurations
 - [x] Document folder structure
-- [ ] Configure static/media & templates
+- [x] Configure static/media & templates
 - [ ] Unit test
 - [ ] Integrate reactjs
 - [ ] Github action
