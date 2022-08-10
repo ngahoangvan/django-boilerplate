@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  nginx:
+    container_name: n1
+    image: nginx:1.21.3-alpine
+    restart: always
+    volumes:
+      - ./nginx/app.conf:/etc/nginx/conf.d/app.conf
+      # - ./nginx-certbot/htpasswd/pwdfile:/etc/nginx/pwdfile
+      # - /etc/letsencrypt:/etc/letsencrypt
+      # - /var/www/certbot:/var/www/certbot
+      - ./src/media:/media
+      - ./src/static:/static
+    ports:
+      - "80:80"
+      - "443:443"
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    networks:
+      - app_network
+
+networks:
+  app_network:
+
+
+  # certbot:
+  #   image: certbot/certbot
+  #   restart: always
+  #   volumes:
+  #     - /etc/letsencrypt:/etc/letsencrypt
+  #     - /var/www/certbot:/var/www/certbot
+  #   entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"

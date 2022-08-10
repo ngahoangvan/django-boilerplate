@@ -3,6 +3,7 @@ db_data
 
 # Django
 static
+media
 __pycache__
 .env
 
