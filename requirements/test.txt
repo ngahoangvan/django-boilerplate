@@ -1,1 +1,5 @@
 -r common.txt
+faker==13.15.1
+pytest==7.1.2
+pytest-django==4.5.2
+pytest-cov==3.0.0
