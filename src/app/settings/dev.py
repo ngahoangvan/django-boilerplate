@@ -3,7 +3,7 @@ from .common import * #noqa
 # Core
 DEBUG = DEBUG_TOOLBAR = True
 INSTALLED_APPS += [
-    'drf_yasg'
+    'drf_yasg',
 ]
 
 # Swagger

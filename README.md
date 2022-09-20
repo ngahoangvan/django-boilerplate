@@ -79,6 +79,35 @@ will look like:
 **Note**: If you got issue is connection with database, please look at 
 ```src/app/settings/common.py``` to edit DATABASES setting
 
+### Extensions - Setup JupyterLab for Django Project
+
+- Step 1: Install Jupyter Lab package
+```bash
+pip install jupyterlab
+```
+
+- Step 2: Use below config inside ```src/app/settings/dev.py```
+```py
+try:
+    import jupyterlab
+    notebook_default_url = '/lab'
+except ImportError:
+    notebook_default_url = '/tree'
+
+NOTEBOOK_ARGUMENTS = [
+    '--ip', '0.0.0.0',
+    '--port', '8888',
+    '--NotebookApp.default_url', notebook_default_url,
+]
+IPYTHON_KERNEL_DISPLAY_NAME = 'Django Kernel'
+```
+
+- Step 3: Start Jupyter Lab server
+
+```bash
+python manage.py shell_plus --notebook
+```
+
 ## Folder Structure
 ```bash
 .
@@ -110,6 +139,7 @@ will look like:
 - [x] Add docker configurations
 - [x] Document folder structure
 - [x] Configure static/media & templates
-- [ ] Unit test
+- [x] Unit test
+- [x] Setup Jupyter Lab 
 - [ ] Integrate reactjs
 - [ ] Github action
