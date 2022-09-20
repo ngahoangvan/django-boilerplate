@@ -14,33 +14,32 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-from drf_yasg.views import get_schema_view
-from drf_yasg import openapi
-from rest_framework import permissions
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-
+from django.urls import include, path
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+from rest_framework import permissions
 
 schema_view = get_schema_view(
     openapi.Info(
-        title='Project API',
-        default_version='v1',
-        description='Initial API for Project app',
+        title="Project API",
+        default_version="v1",
+        description="Initial API for Project app",
         terms_of_service="",
         contact=openapi.Contact(email="ngahv2222@gmail.com"),
         license=openapi.License(name="Project exclusive license"),
     ),
     public=True,
-    permission_classes=[permissions.IsAdminUser]
+    permission_classes=[permissions.IsAdminUser],
 )
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('auth/', include('authentication.urls')),
-    path('users/', include('users.urls')),
+    path("admin/", admin.site.urls),
+    path("auth/", include("authentication.urls")),
+    path("users/", include("users.urls")),
     # Swagger
-    path('', schema_view.with_ui('swagger', cache_timeout=0), name="Schema Swagger UI"),
-    path('redoc', schema_view.with_ui('redoc', cache_timeout=0), name="Schema Redoc")
+    path("", schema_view.with_ui("swagger", cache_timeout=0), name="Schema Swagger UI"),
+    path("redoc", schema_view.with_ui("redoc", cache_timeout=0), name="Schema Redoc"),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

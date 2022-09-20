@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404
-from authentication.models import User
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
+
+from authentication.models import User
 
 from .serializers import UserSerializer
 
@@ -14,18 +15,16 @@ class GetUsersAPIView(generics.GenericAPIView):
     def get(self, request):
         user_db = User.objects.all()
         response = self.serializer_class(user_db, many=True).data
-        return Response(
-            data={'data': response},
-            status=status.HTTP_200_OK
-        )
+        return Response(data={"data": response}, status=status.HTTP_200_OK)
 
 
 class GetMeAPIView(generics.RetrieveUpdateAPIView):
     """
     Retrieve and Update user APIs
     """
+
     serializer_class = UserSerializer
-    permission_classes = (permissions.IsAuthenticated, )
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get_object(self):
         queryset = self.filter_queryset(self.get_queryset())
@@ -41,13 +40,13 @@ class GetUserByIdAPIView(generics.GenericAPIView):
     """
     Get other user by user_id
     """
+
     serializer_class = UserSerializer
-    permission_classes = (permissions.IsAuthenticated, )
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get(self, request, *args, **kwargs):
-        user_id = self.kwargs.get('user_id')
+        user_id = self.kwargs.get("user_id")
         user = get_object_or_404(User, id=user_id)
         return Response(
-            data={'data': UserSerializer(user).data},
-            status=status.HTTP_200_OK
+            data={"data": UserSerializer(user).data}, status=status.HTTP_200_OK
         )

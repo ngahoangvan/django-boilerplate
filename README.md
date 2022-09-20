@@ -40,7 +40,7 @@ $ conda activate venv
 # Install virtualenv from pip
 $ pip install virtualenv
 
-# create 
+# create
 $ python -m venv venv
 $ source .venv/bin/active
 ```
@@ -69,14 +69,14 @@ will look like:
 # Copy .env file
 (venv) $ cp src/.env.example src/.env
 # Create migration
-(venv) $ python src/manage.py makemigrations 
+(venv) $ python src/manage.py makemigrations
 # Apply migration file
 (venv) $ python src/manage.py migrate
 # Run server
 (venv) $ python src/manage.py run server
 ```
 
-**Note**: If you got issue is connection with database, please look at 
+**Note**: If you got issue is connection with database, please look at
 ```src/app/settings/common.py``` to edit DATABASES setting
 
 ### Extensions - Setup JupyterLab for Django Project
@@ -129,7 +129,7 @@ python manage.py shell_plus --notebook
     ├── users                    # user app
     ├── tests                    # unit test
     ├── manage.py                # django manage file
-    └── ... 
+    └── ...
 ```
 
 ## TODO list
@@ -140,6 +140,7 @@ python manage.py shell_plus --notebook
 - [x] Document folder structure
 - [x] Configure static/media & templates
 - [x] Unit test
-- [x] Setup Jupyter Lab 
+- [x] Setup Jupyter Lab
+- [x] Setup pre-commit
 - [ ] Integrate reactjs
 - [ ] Github action

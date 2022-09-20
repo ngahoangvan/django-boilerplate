@@ -5,3 +5,4 @@ flake8==3.8.4
 codecov==2.1.11
 python-dotenv==0.20.0
 config==0.5.1
+pre-commit==2.20.0

@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 User = get_user_model()
 
+
 # You can use UserCreationForm to instead
 # https://docs.djangoproject.com/en/4.0/topics/auth/default/#django.contrib.auth.forms.UserCreationForm
 class UserAdminAddForm(forms.ModelForm):
@@ -13,7 +14,9 @@ class UserAdminAddForm(forms.ModelForm):
     A form for creating new users. Includes all the required
     fields, plus a repeated password.
     """
-    password = forms.CharField(label=_("Password"),
+
+    password = forms.CharField(
+        label=_("Password"),
         strip=False,
         widget=forms.PasswordInput(attrs={"autocomplete": "new-password"}),
         help_text=password_validation.password_validators_help_text_html(),
@@ -27,7 +30,7 @@ class UserAdminAddForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['username', 'email']
+        fields = ["username", "email"]
 
     def clean(self):
         """
@@ -50,7 +53,7 @@ class UserAdminAddForm(forms.ModelForm):
                 password_validation.validate_password(password, self.instance)
             except ValidationError as error:
                 self.add_error("password", error)
-    
+
     def save(self, commit=True):
         # Save the provided password in hashed format
         user = super().save(commit=False)
@@ -66,11 +69,12 @@ class UserAdminChangeForm(forms.ModelForm):
     the user, but replaces the password field with admin's
     password hash display field.
     """
+
     password = ReadOnlyPasswordHashField()
 
     class Meta:
         model = User
-        fields = ['email', 'username', 'password', 'is_active']
+        fields = ["email", "username", "password", "is_active"]
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.

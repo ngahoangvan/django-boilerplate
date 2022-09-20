@@ -11,25 +11,53 @@ class UserAdmin(BaseUserAdmin):
     add_form = UserAdminAddForm
 
     # display on admin page
-    list_display = ('username', 'email', 'first_name', 'last_name', 'phone_number', 'created_at', 'updated_at',)
-    list_filter= []
+    list_display = (
+        "username",
+        "email",
+        "first_name",
+        "last_name",
+        "phone_number",
+        "created_at",
+        "updated_at",
+    )
+    list_filter = []
     fieldsets = (
-        ('Permissions', {'fields': ('is_verified', 'is_superuser', 'is_active', 'is_staff')}),
-        ('User info', {'fields': (
-            'avatar', 'email', 'username', 'first_name', 'last_name', 'password',
-            'phone_number', 'address', 'date_of_birth', 'gender', 'role'
-        )})
+        (
+            "Permissions",
+            {"fields": ("is_verified", "is_superuser", "is_active", "is_staff")},
+        ),
+        (
+            "User info",
+            {
+                "fields": (
+                    "avatar",
+                    "email",
+                    "username",
+                    "first_name",
+                    "last_name",
+                    "password",
+                    "phone_number",
+                    "address",
+                    "date_of_birth",
+                    "gender",
+                    "role",
+                )
+            },
+        ),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
     add_fieldsets = (
-        (None, {
-            'classes': ('wide',),
-            'fields': ('username', 'email', 'password', 'password_repeat')}
-         ),
+        (
+            None,
+            {
+                "classes": ("wide",),
+                "fields": ("username", "email", "password", "password_repeat"),
+            },
+        ),
     )
-    search_fields = ['username']
-    ordering = ['username']
+    search_fields = ["username"]
+    ordering = ["username"]
     filter_horizontal = ()
 
 

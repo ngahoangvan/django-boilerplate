@@ -1,18 +1,15 @@
 import pytest
 
 from tests.authentication.factories import (
+    ActiveUserFactory,
     DefaultUserFactory,
     DummyUserFactory,
-    ActiveUserFactory,
 )
 
 
 @pytest.fixture
 def default_user():
-    return DefaultUserFactory(
-        is_superuser=False,
-        is_staff=False
-    )
+    return DefaultUserFactory(is_superuser=False, is_staff=False)
 
 
 @pytest.fixture

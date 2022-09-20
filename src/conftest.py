@@ -3,14 +3,15 @@ https://stackoverflow.com/questions/34466027/in-pytest-what-is-the-use-of-confte
 """
 
 import os
-import pytest
+
 import django
+import pytest
 from django.conf import settings
 
 # We manually designate which settings
 # we will be using in an environment variable
 # This is similar to what occurs in the `manage.py`
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings.test')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "app.settings.test")
 
 
 # `pytest` automatically calls this function once when tests are run.
@@ -33,5 +34,5 @@ def enable_db_access_for_all_tests(db):
 
 # https://docs.pytest.org/en/stable/writing_plugins.html?highlight=plugins#requiring-loading-plugins-in-a-test-module-or-conftest-file
 pytest_plugins = [
-    'tests.authentication.fixtures',
+    "tests.authentication.fixtures",
 ]

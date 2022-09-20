@@ -3,9 +3,13 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 
-from .serializers import LoginSerializer, LogoutSerializer, RegisterSerializer
+from .serializers import (
+    LoginSerializer,
+    LogoutSerializer,
+    RegisterSerializer,
+    WelcomeEmailSerializer,
+)
 
-# Create your views here.
 
 class RegisterAPIView(generics.GenericAPIView):
     serializer_class = RegisterSerializer
@@ -13,8 +17,9 @@ class RegisterAPIView(generics.GenericAPIView):
     @swagger_auto_schema(
         responses={
             201: RegisterSerializer(),
-            401: 'Account with above email already exist. Please login instead.',
-        })
+            401: "Account with above email already exist. Please login instead.",
+        }
+    )
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -23,7 +28,9 @@ class RegisterAPIView(generics.GenericAPIView):
             user_data = serializer.data
             return Response(user_data, status=status.HTTP_201_CREATED)
         except Exception as e:
-            return Response({'errors': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(
+                {"errors": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
 
 class LoginAPIView(generics.GenericAPIView):
@@ -32,15 +39,18 @@ class LoginAPIView(generics.GenericAPIView):
     @swagger_auto_schema(
         responses={
             200: LoginSerializer(),
-            401: 'Invalid login credentials. Please re-enter your email and password.'
-        })
+            401: "Invalid login credentials. Please re-enter your email and password.",
+        }
+    )
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         try:
-            return Response(serializer.data, status=status.HTTP_200_OK) 
+            return Response(serializer.data, status=status.HTTP_200_OK)
         except Exception as e:
-            return Response(data={"erros": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(
+                data={"erros": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
 
 class LogoutAPIView(generics.GenericAPIView):
@@ -54,11 +64,11 @@ class LogoutAPIView(generics.GenericAPIView):
             serializer.save()
             return Response(status=status.HTTP_204_NO_CONTENT)
         except Exception as e:
-            return Response(data={'errors': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(data={"errors": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class WelcomeEmailView(generics.GenericAPIView):
-    serializer_class = None
+    serializer_class = WelcomeEmailSerializer
 
     def get(self, request):
-        return render(request, 'email/base_email.html',{})
+        return render(request, "email/base_email.html", {})
