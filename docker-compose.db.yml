@@ -2,8 +2,8 @@ version: "3"
 
 services:
   db:
-    container_name: pg13
-    image: timescale/timescaledb:latest-pg13
+    container_name: django-postgres
+    image: postgres:16
     environment:
       - POSTGRES_USER=${POSTGRES_USER:-postgres}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-Python123}
@@ -13,11 +13,11 @@ services:
     ports:
       - 5432:5432
 
-  pgAdmin:
-    container_name: pgAdmin
-    image: dpage/pgadmin4:5.3
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=dev@gmail.com
-      - PGADMIN_DEFAULT_PASSWORD=Python123
-    ports:
-      - 5050:80
+  # pgAdmin:
+  #   container_name: pgAdmin
+  #   image: dpage/pgadmin4:5.3
+  #   environment:
+  #     - PGADMIN_DEFAULT_EMAIL=dev@gmail.com
+  #     - PGADMIN_DEFAULT_PASSWORD=Python123
+  #   ports:
+  #     - 5050:80

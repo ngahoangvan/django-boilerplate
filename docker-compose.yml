@@ -2,8 +2,8 @@ version: "3"
 
 services:
   db:
-    container_name: pg13
-    image: timescale/timescaledb:latest-pg13
+    container_name: django-postgres
+    image: postgres:16
     environment:
       - POSTGRES_USER=${POSTGRES_USER:-postgres}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-Python123}
@@ -16,7 +16,7 @@ services:
       - app_network
 
   app:
-    container_name: django
+    container_name: django-app
     build:
       context: .
       dockerfile: ./Dockerfile
