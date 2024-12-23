@@ -1,0 +1,22 @@
+name: Auto approve
+on: pull_request
+permissions:
+  pull-requests: write
+
+jobs:
+  auto-approve:
+    if: github.actor == 'renovate[bot]' || github.actor == 'ngahoangvan'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/github-script@v6
+      name: Approve LGTM Review
+      with:
+        script: |
+          github.rest.pulls.createReview({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            pull_number: context.issue.number,
+            review_id: 1,
+            event: 'APPROVE',
+            body: 'LGTM!'
+          })
